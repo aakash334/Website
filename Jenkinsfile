@@ -5,6 +5,7 @@ pipeline {
 
         stage('Clone') {
             steps {
+                echo 'Cloning repository...'
                 git 'https://github.com/aakash334/Website.git'
             }
         }
@@ -23,7 +24,17 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'xcopy /E /I /Y * C:\\deploy\\website'
+                bat '''
+                echo Deploying files...
+
+                if not exist C:\\deploy\\Website (
+                    mkdir C:\\deploy\\Website
+                )
+
+                xcopy /E /I /Y * C:\\deploy\\Website
+
+                echo Deployment completed!
+                '''
             }
         }
     }
