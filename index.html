@@ -11,11 +11,11 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background-color: #f4f4f4;
+            background-color: #eef2f7; /* updated background */
             color: #333;
         }
         header {
-            background-color: #3300ff;
+            background: linear-gradient(90deg, #3300ff, #0066ff); /* gradient added */
             color: white;
             text-align: center;
             padding: 2rem 0;
@@ -23,6 +23,11 @@
         }
         header h1 {
              margin: 0;
+             font-size: 2.5rem;
+        }
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
         }
         .profile-icon {
             position: absolute;
@@ -32,7 +37,7 @@
             cursor: pointer;
         }
         nav {
-            background-color: #333;
+            background-color: #222; /* darker nav */
             color: white;
             text-align: center;
             padding: 1rem 0;
@@ -43,33 +48,37 @@
             padding: 0.5rem 1rem;
             margin: 0 0.5rem;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: 0.3s;
         }
         nav a:hover {
-            background-color: #555;
+            background-color: #0066ff; /* improved hover */
         }
         main {
             padding: 2rem;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         article {
             background-color: white;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* smoother corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        article:hover {
+            transform: scale(1.02); /* hover effect */
         }
         article h3 {
-            color: #00ff48;
+            color: #0066ff; /* updated color */
             margin-bottom: 0.5rem;
         }
         article p {
-            color: #333;
+            color: #444;
             line-height: 1.6;
         }
         footer {
-            background-color: #333;
+            background-color: #222;
             color: white;
             text-align: center;
             padding: 1rem 0;
@@ -79,7 +88,8 @@
 </head>
 <body>
     <header>
-        <h1>Read Articles</h1>
+        <h1>Read Articles UI ✨</h1> <!-- updated heading -->
+        <p class="tagline">Explore. Learn. Grow.</p> <!-- new UI line -->
         <span class="material-icons profile-icon">person</span>
     </header>
 
@@ -107,25 +117,25 @@
             <article>
                 <h3>Article Title 1</h3>
                 <p>Exploring modern technology and its impact.<br><br>
-                Technology is rapidly changing our lives through AI, automation, and digital tools. While it improves efficiency, it also requires people to adapt and learn new skills.</p>
+                Technology is rapidly changing our lives through AI, automation, and digital tools.</p>
             </article>
 
             <article>
                 <h3>Article Title 2</h3>
                 <p>Mastering digital marketing basics.<br><br>
-                Digital marketing helps businesses grow online using SEO, content, and social media. A strong strategy builds brand awareness and customer engagement.</p>
+                Digital marketing helps businesses grow online using SEO and social media.</p>
             </article>
 
             <article>
                 <h3>Article Title 3</h3>
                 <p>Getting started with Python coding.<br><br>
-                Python is an easy and powerful language used in many fields like web development and data science. Its simplicity makes it perfect for beginners.</p>
+                Python is an easy and powerful language used in many fields.</p>
             </article>
 
             <article>
                 <h3>Article Title 4</h3>
                 <p>Improve productivity with time management.<br><br>
-                Planning tasks, setting priorities, and avoiding distractions can help you work efficiently and reduce stress in daily life.</p>
+                Planning tasks and avoiding distractions improves efficiency.</p>
             </article>
 
         </section>
