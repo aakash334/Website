@@ -3,13 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
-            steps {
-                echo 'Cloning repository...'
-                git 'https://github.com/aakash334/Website.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo 'Building project...'
