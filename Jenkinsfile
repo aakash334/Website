@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                echo 'Cloning repository...'
+                git 'https://github.com/aakash334/Website.git'
             }
         }
 
@@ -17,27 +17,14 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
+                echo 'Testing project...'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying project...'
-
-                // Simulated deployment
-                sh 'mkdir -p deploy'
-                sh 'cp -r * deploy/'
+                bat 'xcopy /E /I /Y * C:\\deploy\\website'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Deployment successful!'
-        }
-        failure {
-            echo 'Build failed!'
         }
     }
 }
