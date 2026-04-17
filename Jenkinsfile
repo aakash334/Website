@@ -21,20 +21,22 @@ pipeline {
                 echo 'Testing project...'
             }
         }
-stage('Deploy') {
-    steps {
-        bat '''
-        echo Deploying files...
 
-        cd %WORKSPACE%
+        stage('Deploy') {
+            steps {
+                bat '''
+                echo Deploying files...
 
-        if not exist C:\\deploy\\Website (
-            mkdir C:\\deploy\\Website
-        )
+                if not exist C:\\deploy\\Website (
+                    mkdir C:\\deploy\\Website
+                )
 
-        xcopy /E /I /Y * C:\\deploy\\Website
+                xcopy /E /I /Y * C:\\deploy\\Website
 
-        echo Deployment completed!
-        '''
+                echo Deployment completed!
+                '''
+            }
+        }
+
     }
 }
