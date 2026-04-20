@@ -16,21 +16,24 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+       stage('Deploy') {
             steps {
-                echo 'Deploying to XAMPP htdocs/Website...'
+                echo 'Syncing all files to XAMPP htdocs/Website...'
                 bat '''
                 @echo off
-                :: Create the Website folder if it does not exist
+                :: Create folder if it doesn't exist
                 if not exist "C:\\xampp\\htdocs\\Website" (
                     mkdir "C:\\xampp\\htdocs\\Website"
                 )
                 
-                :: Copy the file into that specific folder
-                copy /Y index.html "C:\\xampp\\htdocs\\Website\\"
+                :: xcopy flags:
+                :: /S = Copies directories and subdirectories
+                :: /Y = Overwrites existing files without asking
+                :: /I = If destination doesn't exist, assumes it's a directory
+                :: /F = Displays full source and destination filenames while copying
+                
+                xcopy . "C:\\xampp\\htdocs\\Website\\" /S /Y /I /F
                 '''
-                echo 'Deployment completed!'
+                echo 'Deployment complete! All files synced.'
             }
         }
-    }
-}
