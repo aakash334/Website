@@ -11,17 +11,25 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing project...'
-                // Checks if index.html exists before deploying
+                // Check if the source file exists in GitHub workspace
                 bat 'if exist index.html (echo File exists) else (exit 1)'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying to XAMPP htdocs...'
-                // This copies your files directly to the XAMPP server
-                bat 'xcopy /Y index.html C:\\xampp\\htdocs\\'
-                echo 'Deployment completed! View at http://localhost/index.html'
+                echo 'Deploying to XAMPP htdocs/Website...'
+                bat '''
+                @echo off
+                :: Create the Website folder if it does not exist
+                if not exist "C:\\xampp\\htdocs\\Website" (
+                    mkdir "C:\\xampp\\htdocs\\Website"
+                )
+                
+                :: Copy the file into that specific folder
+                copy /Y index.html "C:\\xampp\\htdocs\\Website\\"
+                '''
+                echo 'Deployment completed!'
             }
         }
     }
