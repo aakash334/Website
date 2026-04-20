@@ -4,36 +4,41 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building project...'
+                echo 'Build Stage: Preparing workspace...'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing project...'
-                // Check if the source file exists in GitHub workspace
-                bat 'if exist index.html (echo File exists) else (exit 1)'
+                echo 'Test Stage: Verifying source files...'
+                // Ensures the index.html is actually there before trying to copy
+                bat 'if exist index.html (echo "SUCCESS: index.html found") else (echo "ERROR: index.html missing" && exit 1)'
             }
         }
 
-       stage('Deploy') {
+        stage('Deploy') {
             steps {
-                echo 'Syncing all files to XAMPP htdocs/Website...'
+                echo 'Deploy Stage: Syncing files to XAMPP...'
                 bat '''
                 @echo off
-                :: Create folder if it doesn't exist
-                if not exist "C:\\xampp\\htdocs\\Website" (
-                    mkdir "C:\\xampp\\htdocs\\Website"
-                )
-                
-                :: xcopy flags:
-                :: /S = Copies directories and subdirectories
-                :: /Y = Overwrites existing files without asking
-                :: /I = If destination doesn't exist, assumes it's a directory
-                :: /F = Displays full source and destination filenames while copying
-                
-                xcopy . "C:\\xampp\\htdocs\\Website\\" /S /Y /I /F
+                :: 1. Ensure the destination directory exists
+                if not exist "C:\\xampp\\htdocs\\Website" mkdir "C:\\xampp\\htdocs\\Website"
+
+                :: 2. Sync files
+                :: /E = Copies all subdirectories (including empty ones)
+                :: /H = Copies hidden and system files too
+                xcopy /y /s /e /i /f /h * "C:\\xampp\\htdocs\\Website\\"
                 '''
-                echo 'Deployment complete! All files synced.'
             }
         }
+    }
+
+    post {
+        success {
+            echo 'CI/CD Pipeline finished successfully! Check http://localhost/Website'
+        }
+        failure {
+            echo 'Pipeline FAILED. Check the Console Output for errors.'
+        }
+    }
+}
